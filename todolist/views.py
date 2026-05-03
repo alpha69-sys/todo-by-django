@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django import forms
 from django.http import HttpResponseRedirect 
 from django.urls import reverse
@@ -22,7 +22,7 @@ def add(request):
             task=form.cleaned_data["task"]
             request.session["tasks"].append(task)
             request.session.modified=True
-            return render(request,"todolist/index.html",{'tasks':request.session["tasks"]})
+            return redirect("index")
         else:
             return render(request,"todolist/add.html",{'form':form})
     return render(request,"todolist/add.html",{
